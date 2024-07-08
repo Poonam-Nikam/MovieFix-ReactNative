@@ -88,8 +88,9 @@ A React Native application to search for movies based on a search string. The ap
 ## Requirements Covered
 
 - Implemented SearchBar component for movie search functionality.
-- Properly centered placeholder text in the TextInput component of the SearchBar.
-- Display movie results based on the search string.
+- Implement Home Component
+- Implemented menubar of filter according genre
+
 
 ## Requirements Not Covered
 
