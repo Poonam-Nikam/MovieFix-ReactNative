@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios';
+import SearchBar from '../components/SearchBar';
 
 type Genre = {
   id: number;
@@ -9,9 +10,10 @@ type Genre = {
 
 type NavbarProps = {
   onGenreSelect: (genreId: number) => void;
+  onSearch: (searchQuery: string) => void;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ onGenreSelect }) => {
+const Navbar: React.FC<NavbarProps> = ({ onGenreSelect,onSearch }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
@@ -30,20 +32,31 @@ const Navbar: React.FC<NavbarProps> = ({ onGenreSelect }) => {
   }, []);
 
   return (
-    <View style={styles.navbar}>
-      <Text style={styles.navbarTitle}>MOVIEFIX</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={true} style={styles.menuBar}>
-        {genres.map((genre) => (
-          <TouchableOpacity key={genre.id} onPress={() => onGenreSelect(genre.id)}>
-            <Text style={styles.menuItem}>{genre.name}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+    <View style={styles.navbarContainer}>
+      <View style={styles.navbar}>
+        <Text style={styles.navbarTitle}>MOVIEFIX</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={true} style={styles.menuBar}>
+          {genres.map((genre) => (
+            <TouchableOpacity key={genre.id} onPress={() => onGenreSelect(genre.id)}>
+              <Text style={styles.menuItem}>{genre.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        <SearchBar onSearch={onSearch} />
+      </View>
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  navbarContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1, // Ensures the navbar is above other elements
+  },
   navbar: {
     padding: 10,
     backgroundColor: '#fff',

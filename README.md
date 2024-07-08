@@ -77,3 +77,78 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+
+
+# React Native Movie Search
+
+A React Native application to search for movies based on a search string. The app includes a SearchBar component for user input and displays movie results.
+
+## Requirements Covered
+
+- Implemented SearchBar component for movie search functionality.
+- Properly centered placeholder text in the TextInput component of the SearchBar.
+- Display movie results based on the search string.
+
+## Requirements Not Covered
+
+- Advanced filtering or sorting of search results.
+- Detailed movie information pages.
+- Persistent storage of search history.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm or yarn
+- React Native CLI
+- Android Studio or Xcode (for Android or iOS development)
+
+### Installation
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/react-native-movie-search.git
+    cd react-native-movie-search
+    ```
+
+2. **Install dependencies**:
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3. **Start the Metro bundler**:
+    ```bash
+    npx react-native start
+    ```
+
+4. **Run the application**:
+    - For iOS:
+        ```bash
+        npx react-native run-ios
+        ```
+    - For Android:
+        ```bash
+        npx react-native run-android
+        ```
+
+### Usage
+
+1. Open the app on your emulator or physical device.
+2. Use the search bar at the top to type in a movie name.
+3. View the search results below the search bar.
+
+
+
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+
+
