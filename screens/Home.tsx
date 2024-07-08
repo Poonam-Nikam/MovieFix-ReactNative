@@ -30,32 +30,71 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const CARD_MARGIN = 8;
 const CARD_WIDTH = (SCREEN_WIDTH - CARD_MARGIN * (NUM_COLUMNS + 1)) / NUM_COLUMNS;
 
-const HomeScreen: React.FC<HomeProps> = ({ navigation }): React.ReactElement => {
+const Home: React.FC<HomeProps> = ({ navigation }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [currentYear, setCurrentYear] = useState<number>(2012);
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchMovies = async (year: number, genreId: number | null) => {
       try {
+        setLoading(true);
+        const genreParam = genreId ? `&with_genres=${genreId}` : '';
         const response = await axios.get(
-          'https://api.themoviedb.org/3/discover/movie?api_key=2dca580c2a14b55200e784d157207b4d&sort_by=popularity.desc&primary_release_year=2023&page=1&vote_count.gte=100'
+          `https://api.themoviedb.org/3/discover/movie?api_key=2dca580c2a14b55200e784d157207b4d&sort_by=popularity.desc&primary_release_year=${year}&page=1&vote_count.gte=100${genreParam}`
         );
-        setMovies(response.data.results);
+        setMovies(response.data.results.slice(0, 20));
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchMovies();
-  }, []);
+    fetchMovies(currentYear, selectedGenre);
+  }, [currentYear, selectedGenre]);
+
+  const loadMoreMovies = (direction: 'up' | 'down') => {
+    if (!loading) {
+      if (direction === 'up' && currentYear > 2012) {
+        setCurrentYear(currentYear - 1);
+      } else if (direction === 'down' && currentYear < new Date().getFullYear()) {
+        setCurrentYear(currentYear + 1);
+      }
+    }
+  };
+
+  const handleScroll = (event: any) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+    const paddingToLoadMore = 20;
+
+    if (contentOffset.y + layoutMeasurement.height + paddingToLoadMore >= contentSize.height) {
+      loadMoreMovies('down');
+    } else if (contentOffset.y <= paddingToLoadMore) {
+      loadMoreMovies('up');
+    }
+  };
+
+  const handleGenreSelect = (genreId: number) => {
+    setSelectedGenre(genreId);
+    setCurrentYear(2012); // Reset the year to 2012 when a new genre is selected
+    setMovies([]); // Clear the current movie list
+  };
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-      
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      style={backgroundStyle}
+      onScroll={handleScroll}
+      scrollEventThrottle={16}
+    >
+      <Navbar onGenreSelect={handleGenreSelect} />
       <View style={styles.container}>
         {movies.map((movie) => (
           <View key={movie.id} style={[styles.card, { width: CARD_WIDTH }]}>
@@ -106,4 +145,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Home;

@@ -1,23 +1,44 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import axios from 'axios';
 
+type Genre = {
+  id: number;
+  name: string;
+};
 
+type NavbarProps = {
+  onGenreSelect: (genreId: number) => void;
+};
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ onGenreSelect }) => {
+  const [genres, setGenres] = useState<Genre[]>([]);
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/genre/movie/list?api_key=2dca580c2a14b55200e784d157207b4d&language=en-US'
+        );
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchGenres();
+  }, []);
+
   return (
     <View style={styles.navbar}>
       <Text style={styles.navbarTitle}>MOVIEFIX</Text>
-      <View style={styles.menuBar}>
-        <TouchableOpacity onPress={() => ('Horror')}>
-          <Text style={styles.menuItem}>Horror</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => ('Action')}>
-          <Text style={styles.menuItem}>Action</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => ('SciFi')}>
-          <Text style={styles.menuItem}>Sci-Fi</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={true} style={styles.menuBar}>
+        {genres.map((genre) => (
+          <TouchableOpacity key={genre.id} onPress={() => onGenreSelect(genre.id)}>
+            <Text style={styles.menuItem}>{genre.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -25,26 +46,27 @@ const Navbar: React.FC = () => {
 const styles = StyleSheet.create({
   navbar: {
     padding: 10,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
     alignItems: 'center',
   },
   navbarTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
-    color:'red'
+    color: 'red',
   },
   menuBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     marginTop: 10,
     width: '100%',
   },
   menuItem: {
     fontSize: 16,
-    color: '#000',
-    backgroundColor:"red"
+    color: '#fff',
+    backgroundColor: '#000',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginHorizontal: 5,
   },
 });
 
