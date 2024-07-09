@@ -11,7 +11,7 @@ function App(): React.JSX.Element {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerShown: false, // This will hide the header for all screens
+          headerShown: false, 
         }}
       >
         <Stack.Screen name="Home" component={Home} />

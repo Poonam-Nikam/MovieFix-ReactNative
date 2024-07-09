@@ -80,6 +80,24 @@ npx react-native run-android
 # or
 npx react-native run-ios
 
+# Hierarchy 
+
+src/
+  App.tsx
+screens/
+  Home.tsx
+  Navbar.tsx
+components/
+  Searchbar.tsx
+
+* App.tsx :Manages routing and navigation within the application, likely defining routes for different screens.Home Navigation has been done.
+
+* Home Screen Interaction: Users interact with the Home screen to scroll through movie content. The component dynamically loads more movies as the user scrolls up or down.
+
+* Navbar Interaction: Users interact with the Navbar component to apply genre filters, refining the displayed movies based on selected genres.
+
+* Searchbar Interaction: Users interact with the Searchbar component to search for specific movies by typing in keywords, which filters the displayed movies accordingly.
+
 ## Features
 
 - Search for movies by title.
