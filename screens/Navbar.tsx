@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 
@@ -13,8 +13,9 @@ type NavbarProps = {
   onSearch: (searchQuery: string) => void;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ onGenreSelect,onSearch }) => {
+const Navbar: React.FC<NavbarProps> = ({ onGenreSelect, onSearch }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Initially set to true
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -24,7 +25,9 @@ const Navbar: React.FC<NavbarProps> = ({ onGenreSelect,onSearch }) => {
         );
         setGenres(response.data.genres);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching genres:', error);
+      } finally {
+        setLoading(false); // Set loading to false whether successful or not
       }
     };
 
@@ -35,16 +38,19 @@ const Navbar: React.FC<NavbarProps> = ({ onGenreSelect,onSearch }) => {
     <View style={styles.navbarContainer}>
       <View style={styles.navbar}>
         <Text style={styles.navbarTitle}>MOVIEFIX</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={true} style={styles.menuBar}>
-          {genres.map((genre) => (
-            <TouchableOpacity key={genre.id} onPress={() => onGenreSelect(genre.id)}>
-              <Text style={styles.menuItem}>{genre.name}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        {loading ? (
+          <ActivityIndicator size="small" color="#000" style={styles.loadingIndicator} />
+        ) : (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.menuBar}>
+            {genres.map((genre) => (
+              <TouchableOpacity key={genre.id} onPress={() => onGenreSelect(genre.id)}>
+                <Text style={styles.menuItem}>{genre.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        )}
         <SearchBar onSearch={onSearch} />
       </View>
-      
     </View>
   );
 };
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 1, // Ensures the navbar is above other elements
+    zIndex: 1,
   },
   navbar: {
     padding: 10,
@@ -80,6 +86,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginHorizontal: 5,
+  },
+  loadingIndicator: {
+    marginLeft: 10,
   },
 });
 

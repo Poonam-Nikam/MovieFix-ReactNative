@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, useColorScheme, Dimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from 'react-native';
 import axios from 'axios';
 import Navbar from './Navbar';
+import SearchBar from '../components/SearchBar';
 
 type Movie = {
   id: number;
@@ -28,7 +29,7 @@ const CARD_WIDTH = (SCREEN_WIDTH - CARD_MARGIN * (NUM_COLUMNS + 1)) / NUM_COLUMN
 
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [currentYear, setCurrentYear] = useState<number>(2012);
+  const [currentYear, setCurrentYear] = useState<number>(2012); // Initial year
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -97,6 +98,11 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
     setSearchQuery(query);
   };
 
+  // Filter movies based on search query
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <View style={{ flex: 1 }}>
       <Navbar onGenreSelect={handleGenreSelect} onSearch={handleSearch} />
@@ -106,10 +112,11 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-
-        {!loading && movies.length === 0 && <Text style={styles.noResultsText}>No movies found.</Text>}
+        {!loading && filteredMovies.length === 0 && (
+          <Text style={styles.noResultsText}>No movies found.</Text>
+        )}
         <View style={styles.moviesContainer}>
-          {movies.map((movie) => (
+          {filteredMovies.map((movie) => (
             <View key={movie.id} style={[styles.card, { width: CARD_WIDTH }]}>
               <Image
                 source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }}

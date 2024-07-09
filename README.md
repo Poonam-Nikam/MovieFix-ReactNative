@@ -1,3 +1,82 @@
+# Movie App React Native
+
+This is a React Native application for browsing movies with search, scroll functionality, and genre filters.
+
+## Features
+
+- Search for movies by title.
+- Filter movies by genre.
+- Infinite scrolling to load more movies.
+
+##Requirements Covered
+
+Covered
+Search functionality.
+Scroll functionality.
+Genre filter buttons UI.
+
+Not Covered
+Authentication (if applicable).
+Backend integration details (if applicable).
+
+
+## Installation
+
+### Prerequisites
+
+- Node.js (version >= 12.0.0)
+- npm (version >= 6.0.0) or yarn (version >= 1.0.0)
+- Expo CLI (if using Expo for React Native development)
+
+### Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Poonam-Nikam/MovieFix-ReactNative
+
+cd MovieFix-ReactNative
+npm install
+# or
+yarn install
+
+# If using Expo CLI
+expo start
+
+# If using React Native CLI
+npx react-native run-android
+# or
+npx react-native run-ios
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
