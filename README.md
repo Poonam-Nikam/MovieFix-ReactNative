@@ -36,7 +36,16 @@ Open Android Studio and click on Configure > AVD Manager.
 Click Create Virtual Device, then choose a device definition and click Next.
 Select a system image with the API level required by your React Native project and click Next.
 Give your AVD a name and click Finish to create it.
-Additional Configuration
+
+### Create Android Virtual Device (AVD):
+To emulate Android devices for testing your applications, set up an AVD.
+Click on Configure > AVD Manager in Android Studio.
+Click Create Virtual Device.
+Choose a device definition (e.g., Pixel 4) and click Next.
+Select a system image with an API level (e.g., Android 11) and click Next.
+Customize AVD options if needed (e.g., RAM size, VM heap size) and click Finish.
+
+### Additional Configuration
 Environment Variables:
 
 Ensure that Android SDK and platform tools are added to your system's PATH environment variable for command-line access.
@@ -44,6 +53,12 @@ Verify Installation:
 
 Open a terminal and run sdkmanager --version to verify the Android SDK installation.
 Run adb --version to verify the Android Debug Bridge (ADB) installation.
+
+### Start the Emulator:
+
+In the AVD Manager, click on the play button (▶︎) next to the AVD you created.
+The emulator will start and boot up the selected Android system image.
+
 
 1. **Clone the repository**
 
