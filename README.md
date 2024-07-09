@@ -60,10 +60,9 @@ In the AVD Manager, click on the play button (▶︎) next to the AVD you create
 The emulator will start and boot up the selected Android system image.
 
 
-1. **Clone the repository**
+ **Clone the repository**
 
- 1. ```bash
-   git clone https://github.com/Poonam-Nikam/MovieFix-ReactNative
+ 1. git clone https://github.com/Poonam-Nikam/MovieFix-ReactNative
 
   2. Go To Your Project
 
