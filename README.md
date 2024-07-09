@@ -2,24 +2,6 @@
 
 This is a React Native application for browsing movies with search, scroll functionality, and genre filters.
 
-## Features
-
-- Search for movies by title.
-- Filter movies by genre.
-- Infinite scrolling to load more movies.
-
-##Requirements Covered
-
-Covered
-Search functionality.
-Scroll functionality.
-Genre filter buttons UI.
-
-Not Covered
-Authentication (if applicable).
-Backend integration details (if applicable).
-
-
 ## Installation
 
 ### Prerequisites
@@ -29,16 +11,52 @@ Backend integration details (if applicable).
 - Expo CLI (if using Expo for React Native development)
 
 ### Steps
+* Node.js: Make sure you have Node.js installed. You can download it from nodejs.org.
+
+* npm or Yarn: npm is installed with Node.js by default. Alternatively, you can use Yarn for package management. Install Yarn from yarnpkg.com if preferred.
+
+* Java Development Kit (JDK): Required for Android development. Download and install JDK from adoptopenjdk.net or oracle.com/java.
+
+* Android Studio: Required for Android development. Download Android Studio from developer.android.com/studio and follow the installation instructions.
+
+
+### Configuring Android Studio
+
+Open Android Studio:
+
+Launch Android Studio from your applications folder or desktop shortcut.
+Set Up Android SDK:
+
+When Android Studio opens, it will prompt you to set up Android SDK components.
+Follow the on-screen instructions to install the necessary SDK components and accept the licenses.
+Configure Android Virtual Device (AVD):
+
+To run your React Native application on an Android emulator, you need to set up an Android Virtual Device (AVD).
+Open Android Studio and click on Configure > AVD Manager.
+Click Create Virtual Device, then choose a device definition and click Next.
+Select a system image with the API level required by your React Native project and click Next.
+Give your AVD a name and click Finish to create it.
+Additional Configuration
+Environment Variables:
+
+Ensure that Android SDK and platform tools are added to your system's PATH environment variable for command-line access.
+Verify Installation:
+
+Open a terminal and run sdkmanager --version to verify the Android SDK installation.
+Run adb --version to verify the Android Debug Bridge (ADB) installation.
 
 1. **Clone the repository**
 
-   ```bash
+ 1. ```bash
    git clone https://github.com/Poonam-Nikam/MovieFix-ReactNative
 
-cd MovieFix-ReactNative
-npm install
-# or
-yarn install
+  2. Go To Your Project
+
+  3. Npm Install
+
+  4. npm start
+
+  5.npx react-native run-android
 
 # If using Expo CLI
 expo start
@@ -47,6 +65,25 @@ expo start
 npx react-native run-android
 # or
 npx react-native run-ios
+
+## Features
+
+- Search for movies by title.
+- Filter movies by genre.
+- Infinite scrolling to load more movies.
+
+##Requirements Covered
+
+* Covered
+Search functionality.
+Scroll functionality.
+Genre filter buttons UI.
+
+* Not Covered
+Authentication (if applicable).
+Backend integration details (if applicable).
+
+
 
 
 
