@@ -1,27 +1,23 @@
-# Movie App React Native
+Movie App React Native
 
 This is a React Native application for browsing movies with search, scroll functionality, and genre filters.
 
-## Installation
+Installation
 
-### Prerequisites
+Prerequisites
+Node.js (version >= 12.0.0)
+npm (version >= 6.0.0) or yarn (version >= 1.0.0)
+Expo CLI (if using Expo for React Native development)
+Steps
+Node.js: Make sure you have Node.js installed. You can download it from nodejs.org.
 
-- Node.js (version >= 12.0.0)
-- npm (version >= 6.0.0) or yarn (version >= 1.0.0)
-- Expo CLI (if using Expo for React Native development)
+npm or Yarn: npm is installed with Node.js by default. Alternatively, you can use Yarn for package management. Install Yarn from yarnpkg.com if preferred.
 
-### Steps
-* Node.js: Make sure you have Node.js installed. You can download it from nodejs.org.
+Java Development Kit (JDK): Required for Android development. Download and install JDK from adoptopenjdk.net or oracle.com/java.
 
-* npm or Yarn: npm is installed with Node.js by default. Alternatively, you can use Yarn for package management. Install Yarn from yarnpkg.com if preferred.
+Android Studio: Required for Android development. Download Android Studio from developer.android.com/studio and follow the installation instructions.
 
-* Java Development Kit (JDK): Required for Android development. Download and install JDK from adoptopenjdk.net or oracle.com/java.
-
-* Android Studio: Required for Android development. Download Android Studio from developer.android.com/studio and follow the installation instructions.
-
-
-### Configuring Android Studio
-
+Configuring Android Studio
 Open Android Studio:
 
 Launch Android Studio from your applications folder or desktop shortcut.
@@ -36,16 +32,13 @@ Open Android Studio and click on Configure > AVD Manager.
 Click Create Virtual Device, then choose a device definition and click Next.
 Select a system image with the API level required by your React Native project and click Next.
 Give your AVD a name and click Finish to create it.
-
-### Create Android Virtual Device (AVD):
-To emulate Android devices for testing your applications, set up an AVD.
+Create Android Virtual Device (AVD):
 Click on Configure > AVD Manager in Android Studio.
 Click Create Virtual Device.
 Choose a device definition (e.g., Pixel 4) and click Next.
 Select a system image with an API level (e.g., Android 11) and click Next.
 Customize AVD options if needed (e.g., RAM size, VM heap size) and click Finish.
-
-### Additional Configuration
+Additional Configuration
 Environment Variables:
 
 Ensure that Android SDK and platform tools are added to your system's PATH environment variable for command-line access.
@@ -53,9 +46,7 @@ Verify Installation:
 
 Open a terminal and run sdkmanager --version to verify the Android SDK installation.
 Run adb --version to verify the Android Debug Bridge (ADB) installation.
-
-### Start the Emulator:
-
+Start the Emulator:
 In the AVD Manager, click on the play button (▶︎) next to the AVD you created.
 The emulator will start and boot up the selected Android system image.
 
